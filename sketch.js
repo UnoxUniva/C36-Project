@@ -20,7 +20,7 @@ function setup() {
 
   foodObj = new Food();
 
-  foodStock=database.ref('Food');
+  foodStock=database.ref('food');
   foodStock.on("value",readStock);
   
   dog=createSprite(800,200,150,150);
@@ -50,8 +50,16 @@ function draw() {
   fedtime = hour()
   
   //write code to display text lastFed time here
-  text("Last Fed:"+fedtime,400,95)
-  textSize()
+  // text("Last Fed:"+fedtime,400,95)
+  // textSize()
+
+  if(lastFed>=12){
+    text("Last Fed:"+(fedtime-12)+"AM",400,95)
+  }else if(lastFed==0){
+    text("Last Fed: 12AM",400,95)
+  }else{
+    text("Last Fed:"+(fedtime-12)+"PM",400,95)
+  }
  
   drawSprites();
 }
@@ -76,7 +84,7 @@ function feedDog(){
     foodObj.updateFoodStock(food_stock_val-1)
   }
   if(mousePressed(feed)){
-    fedtime
+    fedtime.update
   }
 
 }
@@ -91,4 +99,5 @@ function addFoods(){
   }
   
   }
+
 
